@@ -96,3 +96,28 @@ for thing in everything:
     matches = re.findall(pattern, thing) 
     count += len(matches)
 print(count)
+
+# * . . . . .
+# . * . . . .
+# . . * . . .
+x_down = []
+for i in range(len(grid)-2):
+    for j in range(len(grid[0])-2):
+
+        x_down.append(f"{grid[i][j]}{grid[i+1][j+1]}{grid[i+2][j+2]}")
+        
+# . . * . . .
+# . * . . . .
+# * . . . . .
+x_up = []
+for i in range(len(grid)-2):
+    for j in range(len(grid)-2):
+        x_up.append(f"{grid[i+2][j]}{grid[i+1][j+1]}{grid[i][j+2]}")
+
+x_count = 0
+for down, up in zip(x_down, x_up):
+    if down in ["MAS", "SAM"] and up in ["MAS", "SAM"]:
+        x_count += 1
+
+print(x_count)
+
