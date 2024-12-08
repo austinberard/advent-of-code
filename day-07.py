@@ -26,8 +26,10 @@ def evaluate_expression(numbers, operators):
         num_2 = int(expression.pop(0))
         if operator == '+':
             val = num + num_2
-        else:
+        elif operator == '*':
             val = num * num_2
+        elif operator == '||':
+            val = int(str(num) + str(num_2))
         expression.insert(0, val)
 
     return expression[0]
@@ -45,3 +47,19 @@ for sum, nums in zip(list_of_sums, list_of_nums):
             total_sum += int(sum)
             break
 print(total_sum)
+
+
+
+
+total_sum_part2 = 0
+for sum, nums in zip(list_of_sums, list_of_nums):
+    times = len(nums) - 1
+    options = ['+', '*', '||']
+    to_try = combinations = list(product(options, repeat=times))
+    for combo in to_try:
+        if int(sum) == evaluate_expression(nums, combo):
+            print("Match")
+            print(nums, combo)
+            total_sum_part2 += int(sum)
+            break
+print(total_sum_part2)
